@@ -1,44 +1,64 @@
 "use strict";
-let stringArr = ['one', 'two', 'three'];
-let guiltars = ['Gibson', 'Fender', 5150];
-let mixedData = ['EVH', 1984, true];
-stringArr[0] = 'johnny';
-stringArr.push('jimmy');
-guiltars[0] = 1984;
-guiltars.unshift('Ibanez');
-guiltars = stringArr;
-mixedData = guiltars;
-let test = [];
-let bands = [];
-bands.push('Van Halen');
-// Tuple
-let myTuple = ['EVH', 1984, true];
-let mixed = ['EV', 198, true];
-mixed = myTuple;
-myTuple[1] = 5150;
-// objects
-let myObj;
-myObj = [];
-console.log(typeof myObj);
-myObj = bands;
-const exampleObj = {
-    prop1: 'David',
-    prop2: 'true',
+// literal types
+let myName = 'ismail';
+let userName = 'ismail';
+userName = 'john';
+// functions
+const add = (a, b) => {
+    return a + b;
 };
-exampleObj.prop1 = 'Eddie';
-let evh = {
-    name: 'Eddie',
-    active: false,
-    albums: ['Van Halen', 1984, '5150']
+const logmsg = (message) => {
+    console.log(message);
 };
-let jp = {
-    name: 'Jimmy Page',
-    albums: ['1', '2', 'IV']
+logmsg('Hello, TypeScript!');
+logmsg(add(5, 10));
+let subtract = function (a, b) {
+    return a - b;
 };
-const greetGuiltarsit = (guiltarsit) => {
-    if (guiltarsit.name) {
-        return `Hello ${guiltarsit.name.toUpperCase()}!`;
+let multiply = function (c, d) {
+    return c * d;
+};
+logmsg(multiply(5, 10));
+//optional parameters
+const addAll = (a, b, c) => {
+    if (typeof c !== 'undefined') {
+        return a + b + c;
     }
-    return 'Hello World!';
+    return a + b;
 };
-console.log(greetGuiltarsit(jp));
+//default parameters values
+const sumAll = (a, b, c = 2) => {
+    return a + b + c;
+};
+logmsg(addAll(2, 3, 2));
+logmsg(addAll(2, 3));
+logmsg(sumAll(2, 3));
+// rest parameters
+const total = (...nums) => {
+    return nums.reduce((prev, curr) => prev + curr);
+};
+logmsg(total(1, 2, 3, 4));
+const createError = (errMsg) => {
+    throw new Error(errMsg);
+};
+const infinite = () => {
+    let i = 1;
+    while (true) {
+        i++;
+        if (i > 100)
+            break;
+    }
+};
+// custom type guard
+const isNumber = (value) => {
+    return typeof value === 'number'
+        ? true : false;
+};
+// use of never type
+const numberOrString = (value) => {
+    if (typeof value === 'string')
+        return 'string';
+    if (isNumber(value))
+        return 'number';
+    return createError('This should never happen');
+};
